@@ -68,11 +68,16 @@ class DataShower:
         print(column_list)
         print(final_values)
         
-        self.view.controls.append(ft.DataTable(
-            columns = column_list,
-            rows = final_values,
-        ))
-        
+        self.view.controls.append(
+                        ft.DataTable(
+                        width = 500,
+                        columns = column_list,
+                        rows = final_values,
+                        )
+                    )
+
+        self.view.scroll = "auto"
+        self.page.scroll = "always"
         self.page.update()
                 
             

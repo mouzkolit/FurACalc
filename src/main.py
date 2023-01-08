@@ -14,6 +14,7 @@ def main(page: Page):
         page (ft.Page): _description_
     """    
     page.title = "FurACalc"
+    page.scroll = "auto"
     app = WelcomePage(page)
     page.update()
     
