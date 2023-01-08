@@ -4,26 +4,32 @@ from DataShower import DataShower
 
 class NavBar():
     def __init__(self, page):
-        """Create the Navigation Bar
+        """This is the controller for the Navigation Part
+        Which should detect on_click changes of the Buttons
+        Added to the AppBar
+        args:
+            page (ft.Page) -> Main Page of the App 
         """
         self._route = "Welcome"
         self.page = page
-        self.dashboard = DashBoard(page)
-        
+        self.dashboard = DashBoard(page) 
         self.appbar = None
     
     def change_navbar_state(self,e):
         """
-
+        This is the controller function that should detect changes when a button in the 
+        AppBar is clicked
         Args:
-            e (_type_): _description_
+            e (event): Button click event in the AppBar
         """
-        selected_name = e.control.text
+        selected_name = e.control.text # should return the Text of the Button
         if selected_name == "Analysis":
             self.route = "WelcomePage"
             self.dashboard.add_page(self.page, self.appbar)
+            
         elif selected_name == "ImageLoader":
             self.route = "Dashboard"
+            
         elif selected_name =="Show Data":
             self.route = "Data"
             self.table_shower = DataShower(self.page, self.appbar)

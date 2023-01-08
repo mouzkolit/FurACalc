@@ -9,7 +9,7 @@ from flet import (
     colors,
     icons,
     margin,
-    OutlinedButton,
+    TextButton,
     UserControl
 )
 from navbar_left import NavBar
@@ -26,9 +26,9 @@ class WelcomePage():
             toolbar_height=75,
             bgcolor=colors.LIGHT_BLUE_ACCENT_700,
             actions=[
-                OutlinedButton(text = "Analysis", height= 50, on_click=self.navbar_control.change_navbar_state),
-                OutlinedButton(text = "ImageLoader", height= 50,on_click=self.navbar_control.change_navbar_state),
-                OutlinedButton(text = "Show Data", height= 50, on_click=self.navbar_control.change_navbar_state),
+                TextButton(text = "Analysis", height= 50, on_click=self.navbar_control.change_navbar_state),
+                TextButton(text = "ImageLoader", height= 50,on_click=self.navbar_control.change_navbar_state),
+                TextButton(text = "Show Data", height= 50, on_click=self.navbar_control.change_navbar_state),
             ],
         )
         self.navbar_control.appbar = self.appbar
