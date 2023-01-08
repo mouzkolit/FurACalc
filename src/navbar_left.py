@@ -1,5 +1,6 @@
 import flet as ft 
 from Dashboard import DashBoard
+from DataShower import DataShower
 
 class NavBar():
     def __init__(self, page):
@@ -8,6 +9,7 @@ class NavBar():
         self._route = "Welcome"
         self.page = page
         self.dashboard = DashBoard(page)
+        
         self.appbar = None
     
     def change_navbar_state(self,e):
@@ -23,7 +25,9 @@ class NavBar():
         elif selected_name == "ImageLoader":
             self.route = "Dashboard"
         elif selected_name =="Show Data":
-            self.route = "ImageLoader"
+            self.route = "Data"
+            self.table_shower = DataShower(self.page, self.appbar)
+            self.table_shower.add_page(self.page, self.appbar)
             
     @property 
     def route(self):

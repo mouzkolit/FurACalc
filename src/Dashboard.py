@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from flet.matplotlib_chart import MatplotlibChart
 import cv2
 import numpy as np
-matplotlib.use("WebAgg")
+matplotlib.use("svg")
 
 class DashBoard():
     
@@ -32,15 +32,15 @@ class DashBoard():
         page.update()
         
     def view_page(self,appbar):
-         self.view = ft.View(
-                "/dashboard",
-                [appbar,
-                 self.current_path,
-                 self.picker_button,
-                    
-                ]
-            )
-         return self.view
+        self.view = ft.View(
+            "/dashboard",
+            [appbar,
+                self.current_path,
+                self.picker_button,
+                
+            ]
+        )
+        return self.view
         
     def on_dialog_result(self,e: ft.FilePickerResultEvent):
         """_summary_
