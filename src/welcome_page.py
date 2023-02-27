@@ -15,7 +15,13 @@ from flet import (
 from navbar_left import NavBar
 
 class WelcomePage():
-    def __init__(self, page: Page):
+    def __init__(self, page: Page) -> None:
+        """Init which should initialize the Navigation Bar at the Welcome Page
+        Here a Welcome View should be added @toDO
+
+        Args:
+            page (ft.Page): Initiale Page that was constructed in the main.py
+        """
         self.page = page
         self.navbar_control = NavBar(page)
         self.appbar = AppBar(

@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 from flet.matplotlib_chart import MatplotlibChart
 import cv2
 import numpy as np
-matplotlib.use("svg")
+from matplotlib.figure import Figure
+from BackendMatplot import InteractiveBackend
+#matplotlib.use("svg")
 
 class DashBoard():
     
@@ -57,12 +59,16 @@ class DashBoard():
         
         
     def draw_image(self, e = None):
-        self.fig,ax = plt.subplots()
+        self.fig = Figure()
+        backend = InteractiveBackend(self.fig)
+        
         image = next(self.image_iterator)    
         _,thresh = cv2.threshold(image, np.mean(image), 255, cv2.THRESH_BINARY_INV)
         print(thresh.shape)
         contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        plt.imshow(thresh)
+        #plt.imshow(thresh)
+        backend.draw()
+        self.fig.canvas.mpl_connect('button_press_event', backend.button_press_event)
         print(contours)
         
         if e:

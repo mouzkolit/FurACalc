@@ -58,8 +58,9 @@ class DataLoaderLogs:
     def open_function_save_dataframe_tolist(self) -> None:
         """__summary__: Retrieves the path and opens the 
         """
-        analysis_files = sorted([i  for i in os.listdir(self.path) if ".LOG" in i])
-        if analysis_files:
+        if analysis_files := sorted(
+            [i for i in os.listdir(self.path) if ".LOG" in i]
+        ):
             for i in analysis_files:
                 dataframe = self.preprocess_logs(i)
                 self.list_dataframes.append(dataframe)
@@ -96,12 +97,11 @@ class DataLoaderLogs:
     def __next__(self) -> None:
         """Iterator: that iterates through
         """
-        if self.list_dataframes:
-            if self.iterator <= len(self.list_dataframes):
-                return self.list_dataframes[self.iterator]
-            else:
-                raise StopIteration
-        else:
+        if not self.list_dataframes:
             raise ReferenceError("List DataFrames are not loaded properly")
+        if self.iterator <= len(self.list_dataframes):
+            return self.list_dataframes[self.iterator]
+        else:
+            raise StopIteration
                 
         
