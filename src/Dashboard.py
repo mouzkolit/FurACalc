@@ -22,8 +22,12 @@ class DashBoard():
         self._route = "Welcome"
         self.data_loader = None
         
-    def add_page(self, page, appbar):
+    def add_page(self, page, appbar) -> None:
         """_summary_: Should add the Dashboard Page to the screen 
+        args:
+        
+            page: ft.Page
+            appbar: ft.NavigationBar
         """
         print("added page")
         page.views.clear()
@@ -48,7 +52,7 @@ class DashBoard():
         """_summary_
 
         Args:
-            e (ft.FilePickerResultEvent): _description_
+            e (ft.FilePickerResultEvent): Opens the filepicker
         """
         self.current_path.value = e.path
         path = "/"+"/".join(e.path.split("/")[3:])
@@ -59,18 +63,30 @@ class DashBoard():
         
         
     def draw_image(self, e = None):
+        """_summary_: this should retrieve the image from the iterator
+        Draw the image into a canvas and should finally connect to the
+        interactive backend-->currently this is not supported
+
+        Args:
+            e ():. If not only one image is rendered then we have to remove the old
+            canvas and data
+        """
         self.fig = Figure()
-        backend = InteractiveBackend(self.fig)
         
-        image = next(self.image_iterator)    
+        backend = InteractiveBackend(self.fig) # Loads all the figures and provide an iterator
+        image = next(self.image_iterator)# next image
+        
         _,thresh = cv2.threshold(image, np.mean(image), 255, cv2.THRESH_BINARY_INV)
         print(thresh.shape)
+        
+        # retrieves the contours
         contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         #plt.imshow(thresh)
         backend.draw()
         self.fig.canvas.mpl_connect('button_press_event', backend.button_press_event)
-        print(contours)
+
         
+        # check
         if e:
             self.view.controls.pop() 
         self.view.controls.append(
@@ -94,7 +110,13 @@ class DashBoard():
         plt.close()
         
     def get_segmentations(self, image):
-        print("hello there")        
+        """_summary_
+
+        Args:
+            image (backend.image): Is a single image that will be used for segmentation
+        """
+        print("Needs to be implemented")   
+        pass     
         
        
     

@@ -13,6 +13,11 @@ class CalciumData:
         self.load_data_to_data()
         
     def load_data_to_data(self):
+        """_summary_: Should load the Calcium Imaging data as a table
+
+        Raises:
+            ImportError: No data were detected
+        """
         data_dir = sorted(os.listdir(self.path))
         data_formats = ["tiff", "png", "jpeg", "jpg"]
         if not data_dir:
@@ -29,13 +34,31 @@ class CalciumData:
                 print(e)
         
     def __str__(self) -> str:
+        """_summary_: The string representation of the class
+
+        Returns:
+            str: The name of the class
+        """
         return "Data Loader"
     
     def __iter__(self):
+        """Construction of the Class as iterator
+
+        Returns:
+            _type_: _description_
+        """
         self.iterator = 0
         return self
     
     def __next__(self):
+        """_summary_
+
+        Raises:
+            StopIteration: Whenever no image is left in the holded stack self.image_holder
+
+        Returns:
+            _type_: a single image
+        """
         if self.iterator > len(self.image_holder):
             raise StopIteration
         images = self.image_holder[self.iterator]
